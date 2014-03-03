@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="2" passed="2">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="6420" started-at="2014-03-02T10:53:56Z" finished-at="2014-03-02T10:54:03Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="6420" started-at="2014-03-02T10:53:56Z" finished-at="2014-03-02T10:54:03Z">
+      <class name="com.example.tests.GroupCreationTests">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:com.example.tests.GroupCreationTests@3932f2b2]" name="setUp" is-config="true" duration-ms="4540" started-at="2014-03-02T12:53:56Z" finished-at="2014-03-02T12:54:01Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="testEmptyGroupCreation()[pri:0, instance:com.example.tests.GroupCreationTests@3932f2b2]" name="testEmptyGroupCreation" duration-ms="983" started-at="2014-03-02T12:54:01Z" finished-at="2014-03-02T12:54:02Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testEmptyGroupCreation -->
+        <test-method status="PASS" signature="testNonEmptyGroupCreation()[pri:0, instance:com.example.tests.GroupCreationTests@3932f2b2]" name="testNonEmptyGroupCreation" duration-ms="783" started-at="2014-03-02T12:54:02Z" finished-at="2014-03-02T12:54:02Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testNonEmptyGroupCreation -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.example.tests.GroupCreationTests@3932f2b2]" name="tearDown" is-config="true" duration-ms="88" started-at="2014-03-02T12:54:02Z" finished-at="2014-03-02T12:54:03Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- com.example.tests.GroupCreationTests -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
