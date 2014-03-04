@@ -1,117 +1,54 @@
 package com.example.tests;
 
-import java.util.regex.Pattern;
-import java.util.concurrent.TimeUnit;
-import org.junit.*;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
-import org.openqa.selenium.*;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.Test;
 
-public class ContactCreationTests {
-  private WebDriver driver;
-  private String baseUrl;
-  private boolean acceptNextAlert = true;
-  private StringBuffer verificationErrors = new StringBuffer();
-
-  @Before
-  public void setUp() throws Exception {
-    driver = new FirefoxDriver();
-    baseUrl = "http://localhost:8888/index.php";
-    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-  }
-
+public class ContactCreationTests extends TestBase{
+ 
   @Test
-  public void testUntitled2() throws Exception {
+  public void testNonEmptyContactCreation() throws Exception {
     openMainPage();
     gotoNewContact();
-    fillContactForm();
+    ContactData contact = new ContactData();
+    contact.firstname = "First_Name";
+	contact.lastname = "Last_Name";
+	contact.address = "Name Surname\n01234 City\n12 Some.str\nCOUNTRY";
+	contact.homephone = "(044)123-45-67";
+	contact.mobilephone = "+3-8-010-123-45-67";
+	contact.workphone = "044-1234567";
+	contact.email = "email1@adress.com";
+	contact.email2 = "email2@address.com";
+	contact.bday = "29";
+	contact.bmonth = "September";
+	contact.byear = "2001";
+	contact.choosengroup = "group1";
+	contact.address2 = "Name Surname\n01234 City\n12 Some.str\nCOUNTRY2";
+	contact.homephone2 = "http://site.com";
+	fillContactForm(contact);
+    returnHomePage();
+  }
+  
+  @Test
+  public void testEmptyContactCreation() throws Exception {
+    openMainPage();
+    gotoNewContact();
+    ContactData contact = new ContactData();
+    contact.firstname = "";
+	contact.lastname = "";
+	contact.address = "";
+	contact.homephone = "";
+	contact.mobilephone = "";
+	contact.workphone = "";
+	contact.email = "";
+	contact.email2 = "";
+	contact.bday = "-";
+	contact.bmonth = "-";
+	contact.byear = "";
+	contact.choosengroup = "[none]";
+	contact.address2 = "";
+	contact.homephone2 = "";
+	fillContactForm(contact);
     returnHomePage();
   }
 
-private void returnHomePage() {
-	driver.findElement(By.linkText("home page")).click();
-}
 
-private void fillContactForm() {
-	driver.findElement(By.name("firstname")).clear();
-    driver.findElement(By.name("firstname")).sendKeys("First_Name");
-    driver.findElement(By.name("lastname")).clear();
-    driver.findElement(By.name("lastname")).sendKeys("Last_Name");
-    driver.findElement(By.name("address")).clear();
-    driver.findElement(By.name("address")).sendKeys("Name Surname\n01234 City\n12 Some.str\nCOUNTRY");
-    driver.findElement(By.name("home")).clear();
-    driver.findElement(By.name("home")).sendKeys("(044)123-45-67");
-    driver.findElement(By.name("mobile")).clear();
-    driver.findElement(By.name("mobile")).sendKeys("+");
-    driver.findElement(By.name("mobile")).clear();
-    driver.findElement(By.name("mobile")).sendKeys("+3-8-010-123-45-67");
-    driver.findElement(By.name("work")).clear();
-    driver.findElement(By.name("work")).sendKeys("044-1234567");
-    driver.findElement(By.name("email")).clear();
-    driver.findElement(By.name("email")).sendKeys("email1@adress.com");
-    driver.findElement(By.name("email2")).clear();
-    driver.findElement(By.name("email2")).sendKeys("email2@address.com");
-    new Select(driver.findElement(By.name("bday"))).selectByVisibleText("29");
-    new Select(driver.findElement(By.name("bmonth"))).selectByVisibleText("September");
-    driver.findElement(By.name("byear")).clear();
-    driver.findElement(By.name("byear")).sendKeys("2001");
-    new Select(driver.findElement(By.name("new_group"))).selectByVisibleText("group1");
-    driver.findElement(By.name("address2")).clear();
-    driver.findElement(By.name("address2")).sendKeys("Name Surname\n01234 City\n12 Some.str\nCOUNTRY2");
-    driver.findElement(By.name("phone2")).clear();
-    driver.findElement(By.name("phone2")).sendKeys("http://site.com");
-    driver.findElement(By.name("submit")).click();
-}
-
-private void gotoNewContact() {
-	driver.findElement(By.linkText("add new")).click();
-}
-
-private void openMainPage() {
-	driver.get(baseUrl + "/index.php");
-}
-
-  @After
-  public void tearDown() throws Exception {
-    driver.quit();
-    String verificationErrorString = verificationErrors.toString();
-    if (!"".equals(verificationErrorString)) {
-      fail(verificationErrorString);
-    }
-  }
-
-  private boolean isElementPresent(By by) {
-    try {
-      driver.findElement(by);
-      return true;
-    } catch (NoSuchElementException e) {
-      return false;
-    }
-  }
-
-  private boolean isAlertPresent() {
-    try {
-      driver.switchTo().alert();
-      return true;
-    } catch (NoAlertPresentException e) {
-      return false;
-    }
-  }
-
-  private String closeAlertAndGetItsText() {
-    try {
-      Alert alert = driver.switchTo().alert();
-      String alertText = alert.getText();
-      if (acceptNextAlert) {
-        alert.accept();
-      } else {
-        alert.dismiss();
-      }
-      return alertText;
-    } finally {
-      acceptNextAlert = true;
-    }
-  }
 }
