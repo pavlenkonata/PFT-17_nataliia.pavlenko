@@ -32,8 +32,13 @@ public class GroupHelper extends HelperBase {
 	public void deleteGroup(int index) {
 		selectGroupByIndex(index);
 		click(By.name("delete"));
-		
-		
+	}
+	
+	public void deleteFewGroups(int[] index) {
+		for (int i=0; i<index.length; i++){
+			selectGroupByIndex(index[i]);	
+		}
+		click(By.name("delete"));
 	}
 
 	private void selectGroupByIndex(int index) {

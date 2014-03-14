@@ -11,4 +11,13 @@ public class GroupRemovalTests extends TestBase{
 		app.getGroupHelper().deleteGroup(1);
 	    app.getGroupHelper().returntoGroupPage();
 }
+	@Test
+	public void deleteFewGroups() {
+		app.getNavigationHelper().openMainPage();
+	    app.getNavigationHelper().gotoGroupPage();
+	    int [] groupsToDelete = {1,3,5};
+		app.getGroupHelper().deleteFewGroups(groupsToDelete);
+	    app.getGroupHelper().returntoGroupPage();
+}
+	
 }

@@ -45,4 +45,21 @@ import com.example.tests.TestBase;
 		click(By.linkText("home page"));
 	}
 
+
+	
+	public void openContactByIndex(int index) {
+		click(By.xpath("//*/tr["+index+"]/td[7]/a"));
+	}
+
+	public void deleteContact() {
+		click(By.xpath("//*/input[@value = \"Delete\"]"));
+		
+	}
+
+	public void submitContactModificatin() {
+		click(By.xpath("//*/input[@value=\"Update\"]"));
+		
+	}
+
+		
 }
