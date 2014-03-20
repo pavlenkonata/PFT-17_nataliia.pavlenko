@@ -65,24 +65,3 @@ public class ApplicationManager {
 
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
