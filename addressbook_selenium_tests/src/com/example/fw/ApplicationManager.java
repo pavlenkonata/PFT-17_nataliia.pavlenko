@@ -23,6 +23,7 @@ public class ApplicationManager {
 		driver = new FirefoxDriver();
 	    baseUrl = "http://localhost:8888/";
 	    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	    driver.get(baseUrl + "/index.php");
 	    
 	}
 	
@@ -31,7 +32,7 @@ public class ApplicationManager {
 		
 	}
 	
-	public NavigationHelper getNavigationHelper() {
+	public NavigationHelper navigateTo() {
 		if (navigationHelper == null){
 			navigationHelper = new NavigationHelper (this);
 		}

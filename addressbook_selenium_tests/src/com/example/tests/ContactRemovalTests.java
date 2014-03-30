@@ -1,59 +1,55 @@
 package com.example.tests;
 
-import static org.testng.Assert.assertEquals;
-
-import java.util.Collections;
-import java.util.List;
+import static org.junit.Assert.assertThat;
+import static org.hamcrest.Matchers.*;
 import java.util.Random;
-
 import org.testng.annotations.Test;
+
+import com.example.utils.SortedListOf;
 
 public class ContactRemovalTests extends TestBase {
 	@Test
 	public void  deleteSomeContact() {
-		app.getNavigationHelper().openMainPage();
+		app.navigateTo().mainPage();
 		
 		//save old state
-		List<ContactData> oldList = app.getContactHelper().getContacts();
+		SortedListOf<ContactData> oldList = app.getContactHelper().getContacts();
 		
 	    Random rnd = new Random();
 	    int index = rnd.nextInt(oldList.size()-1);
 		
 		//actions
-		app.getContactHelper().openContactByIndex(index);
-		app.getContactHelper().deleteContact();
-		app.getContactHelper().returnHomePage();
+	    app.getContactHelper().deleteContact(index);
+		
 		
 		//save new state
-		List<ContactData> newList = app.getContactHelper().getContacts();
+	    SortedListOf<ContactData> newList = app.getContactHelper().getContacts();
 		
 		//compare states
-		oldList.remove(index);
-				//System.out.println(oldList);
-		Collections.sort(oldList);
-				//System.out.println(oldList);
-	    assertEquals(newList, oldList);
+	    assertThat(newList, equalTo(oldList.without(index)));
 	    		//System.out.println(oldList);
 	}
 	
 	//@Test
 	public void  deleteAllContacts() {
-		app.getNavigationHelper().openMainPage();
 		
 		//save old state
-		List<ContactData> oldList = app.getContactHelper().getContacts();
+		SortedListOf<ContactData> oldList = app.getContactHelper().getContacts();
 		int toDelete = oldList.size();
 		for (int i = 0; i < toDelete; i++){
 			//actions
-			app.getContactHelper().openContactByIndex(0);
-			app.getContactHelper().deleteContact();
-			app.getContactHelper().returnHomePage();			
+			app.getContactHelper().deleteContact(0);
+					
 		}
 
 
 		//save new state
-		List<ContactData> newList = app.getContactHelper().getContacts();
-	    assertEquals(newList.size(), 0);
+		SortedListOf<ContactData> newList = app.getContactHelper().getContacts();
+		
+		//compare states
+		assertThat(newList.size(), equalTo(0));
 	    		//System.out.println(oldList);
 	}
+
+	
 }
