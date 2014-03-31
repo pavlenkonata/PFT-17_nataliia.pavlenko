@@ -24,9 +24,11 @@ public class ContactRemovalTests extends TestBase {
 		
 		//save new state
 	    SortedListOf<ContactData> newList = app.getContactHelper().getContacts();
-		
+	  
 		//compare states
 	    assertThat(newList, equalTo(oldList.without(index)));
+	    
+	  System.out.println(oldList);
 	    		//System.out.println(oldList);
 	}
 	

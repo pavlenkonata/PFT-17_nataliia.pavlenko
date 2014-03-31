@@ -29,8 +29,10 @@ public class ContactModificationTests extends TestBase {
 		    SortedListOf<ContactData> newList = app.getContactHelper().getContacts();
 		    
 		    //compare states
+		    System.out.println(oldList);
+		    System.out.println(newList);
+		    
 		    assertThat(newList, equalTo(oldList.without(index).withAdded(contact)));
-		    	//System.out.println(newList);
 		}
 
 }

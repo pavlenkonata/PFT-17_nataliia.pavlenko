@@ -15,8 +15,6 @@ public class NavigationHelper extends HelperBase {
 	}
 
 	private boolean onGroupPage() {
-		String currentUrl = driver.getCurrentUrl();
-		driver.findElement(By.name("new"));
 		if (driver.getCurrentUrl().contains("/group.php")
 				&& driver.findElements(By.name("new")).size() > 0){
 			return true;

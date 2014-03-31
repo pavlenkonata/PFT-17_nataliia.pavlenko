@@ -52,7 +52,7 @@ public class GroupData implements Comparable<GroupData> {
 	public int compareTo(GroupData other) {
 		
 		//return this.name.compareTo(other.name);
-		return this.name.toLowerCase().compareTo(other.name.toLowerCase());
+		return this.name.compareTo(other.name);
 	}
 
 

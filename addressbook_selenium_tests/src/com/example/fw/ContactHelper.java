@@ -124,6 +124,7 @@ import com.example.utils.SortedListOf;
 	}
 
 	private SortedListOf<ContactData> cachedContacts;
+	
 	public SortedListOf<ContactData> getContacts() {
 		if(cachedContacts == null){
 			rebuildCache();
@@ -133,7 +134,8 @@ import com.example.utils.SortedListOf;
 	
 	
 	private void rebuildCache() {
-		SortedListOf<ContactData> cachedContacts = new SortedListOf<ContactData>();
+		
+		cachedContacts = new SortedListOf<ContactData>();
 		manager.navigateTo().mainPage();
 		List<WebElement> rowsFirstname = driver.findElements(By.xpath("//td[3]")); // bug. firstname -> lastname. correct "//td[2]"
 		List<WebElement> rowsLastname = driver.findElements(By.xpath("//td[2]"));
