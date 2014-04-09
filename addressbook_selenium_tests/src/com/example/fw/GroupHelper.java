@@ -39,7 +39,7 @@ public class GroupHelper extends HelperBase {
 
 	
 	public GroupHelper createGroup(GroupData group) {
-		manager.navigateTo().groupsPage();
+		
     	initGroupCreation();
     	fillGroupForm(group);
     	submitGroupForm();
@@ -93,8 +93,7 @@ public class GroupHelper extends HelperBase {
 	}
 
 	public GroupHelper returntoGroupPage() {
-		manager.navigateTo().groupsPage();
-		//click(By.linkText("group page"));
+	    click(By.linkText("group page"));
 		return this;
 	} 
 	

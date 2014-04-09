@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 import com.example.utils.SortedListOf;
 
 public class ContactRemovalTests extends TestBase {
-	@Test
+	//@Test
 	public void  deleteSomeContact() {
 		app.navigateTo().mainPage();
 		
@@ -32,7 +32,7 @@ public class ContactRemovalTests extends TestBase {
 	    		//System.out.println(oldList);
 	}
 	
-	//@Test
+	@Test
 	public void  deleteAllContacts() {
 		
 		//save old state
