@@ -29,8 +29,9 @@ public class ApplicationManager {
 		String browser = properties.getProperty("browser");
 		if("firefox".equals(browser)){
 			driver = new FirefoxDriver();
-		} else if ("safari".equals(browser)){
-			driver = new SafariDriver();
+		} else if ("chrome".equals(browser)){
+			System.setProperty("webdriver.chrome.driver","/Users/nataliiapavlenko/Documents/Java_dev/PFT-17_nataliia.pavlenko.addressbook_selenium_tests/chromedriver");
+			driver = new ChromeDriver();
 		} else {
 			throw new Error ("Unsupported browser" + browser);
 		}
