@@ -42,6 +42,6 @@ public class TestFolderCreation extends TestBase {
 		assertThat(newFolders, equalTo(oldFolders.withAdded(folder)));
 		assertThat(app.getFolderHelper().createFolder(folder),containsString("Duplicated folder name"));
 		Folders newFolders2 = app.getFolderHelper().getFolders();
-		assertThat(newFolders2, equalTo(oldFolders));
+		assertThat(newFolders2, equalTo(newFolders));
 	}
 }
