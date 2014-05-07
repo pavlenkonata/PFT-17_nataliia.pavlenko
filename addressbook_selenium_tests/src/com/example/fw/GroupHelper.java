@@ -9,32 +9,32 @@ import com.example.tests.GroupData;
 import com.example.tests.TestBase;
 import com.example.utils.SortedListOf;
 
-public class GroupHelper extends HelperBase {
+public class GroupHelper extends WebDriverHelperBase {
 
 	public GroupHelper(ApplicationManager manager) {
 		super(manager);
 	}
 	
-	private SortedListOf<GroupData> cachedGroups;
+	/*private SortedListOf<GroupData> cachedGroups;
 	
 	public SortedListOf<GroupData> getGroups() {
 		if (cachedGroups == null){
 			rebuildCache();
 		}
 		return cachedGroups;
-	}
+	}*/
 	
-	private void rebuildCache() {
-		cachedGroups = new SortedListOf<GroupData>();
+	public  SortedListOf<GroupData> getUiGroups() {
+		SortedListOf<GroupData> groups = new SortedListOf<GroupData>();
 		manager.navigateTo().groupsPage();
 		List<WebElement> checkboxes = driver.findElements(By.name("selected[]"));
 		for (WebElement checkbox : checkboxes) {
 			String title = checkbox.getAttribute("title");
 			//group.name = title.substring("Select (".length(), title.length() - ")".length());
 			String name = title.substring(title.indexOf("(")+1, title.indexOf(")"));
-			cachedGroups.add(new GroupData().withName(name));
+			groups.add(new GroupData().withName(name));
 		}
-		
+		return groups;
 	}
 
 	
@@ -44,7 +44,7 @@ public class GroupHelper extends HelperBase {
     	fillGroupForm(group);
     	submitGroupForm();
     	returntoGroupPage();
-    	rebuildCache();
+    	//manager.getModel().addGroup(group);
     	return this;
 	}
 	
@@ -53,7 +53,7 @@ public class GroupHelper extends HelperBase {
 		selectGroupByIndex(index);
 		submitGroupDeletion();
  		returntoGroupPage();
- 		rebuildCache();
+ 		//manager.getModel().removeGroup(index);
 		return this;
 	}
 
@@ -65,7 +65,7 @@ public class GroupHelper extends HelperBase {
 		fillGroupForm(group);
 		submitGroupModification();
 	    returntoGroupPage();
-	    rebuildCache();
+	   // manager.getModel().removeGroup(index).addGroup(group);
 		return this;
 	}
 
@@ -88,7 +88,6 @@ public class GroupHelper extends HelperBase {
 
 	public GroupHelper submitGroupForm() {
 		click(By.name("submit"));
-		cachedGroups = null;
 		return this;
 	}
 
@@ -102,7 +101,6 @@ public class GroupHelper extends HelperBase {
 			selectGroupByIndex(index[i]);	
 		}
 		submitGroupDeletion();
-		cachedGroups = null;
 		return this;
 	}
 
@@ -118,14 +116,12 @@ public class GroupHelper extends HelperBase {
 	}
 
 	public GroupHelper submitGroupModification() {
-		click(By.name("update"));
-		cachedGroups = null;
+		click(By.name("update")); 
 		return this;
 		
 	}
 	private void submitGroupDeletion() {
 		click(By.name("delete"));
-		cachedGroups = null;
 	}
 	
 

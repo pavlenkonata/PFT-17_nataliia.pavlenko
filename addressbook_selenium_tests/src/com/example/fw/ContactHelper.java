@@ -1,20 +1,15 @@
 package com.example.fw;
 
-import static com.example.fw.ContactHelper.MODIFICATION;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.example.tests.ContactData;
-import com.example.tests.GroupData;
-import com.example.tests.TestBase;
 import com.example.utils.SortedListOf;
 
 
-	public class ContactHelper extends HelperBase {
+	public class ContactHelper extends WebDriverHelperBase {
 		
 		public static boolean CREATION = true;
 		public static boolean MODIFICATION = false;
@@ -29,7 +24,6 @@ import com.example.utils.SortedListOf;
 			fillContactForm(contact, ContactHelper.CREATION);
 			submitContactForm();
 		    returnHomePage();
-		    rebuildCache();
 		    return this;
 		}
 		
@@ -38,7 +32,6 @@ import com.example.utils.SortedListOf;
 			openContactByIndex(index);
 			submitContactDelition();
 			returnHomePage();
-			rebuildCache();
 		    return this;
 		}
 		
@@ -48,7 +41,6 @@ import com.example.utils.SortedListOf;
 			fillContactForm(contact, MODIFICATION);
 			submitContactModification();
 		    returnHomePage();
-		    rebuildCache();
 		    return this;
 		}
 		
@@ -85,7 +77,6 @@ import com.example.utils.SortedListOf;
 
 	public ContactHelper submitContactForm() {
 		click(By.name("submit"));
-		cachedContacts = null;
 		return this;
 	}
 
@@ -109,7 +100,6 @@ import com.example.utils.SortedListOf;
 
 	public ContactHelper submitContactDelition() {
 		click(By.xpath("//*/input[@value = \"Delete\"]"));
-		cachedContacts = null;
 		return this;
 		
 	}
@@ -118,22 +108,21 @@ import com.example.utils.SortedListOf;
 
 	public ContactHelper submitContactModification() {
 		click(By.xpath("//*/input[@value=\"Update\"]"));
-		cachedContacts = null;
 		return this;
 		
 	}
 
-	private SortedListOf<ContactData> cachedContacts;
+	/*private SortedListOf<ContactData> cachedContacts;
 	
 	public SortedListOf<ContactData> getContacts() {
 		if(cachedContacts == null){
 			rebuildCache();
 		}
 		return cachedContacts;
-	}
+	}*/
 	
 	
-	private void rebuildCache() {
+	/*private void rebuildCache() {
 		
 		cachedContacts = new SortedListOf<ContactData>();
 		manager.navigateTo().mainPage();
@@ -148,6 +137,24 @@ import com.example.utils.SortedListOf;
 			//contact.firstname = title.substring(title.indexOf("(")+1, title.indexOf(")"));
 			cachedContacts.add(new ContactData().withFirstname(firstname).withLastname(lastname));
 		}
+	}*/
+	
+		public  SortedListOf<ContactData> getUiContacts(){
+		
+		SortedListOf<ContactData> contacts = new SortedListOf<ContactData>();
+		manager.navigateTo().mainPage();
+		List<WebElement> rowsFirstname = driver.findElements(By.xpath("//td[3]")); // bug. firstname -> lastname. correct "//td[2]"
+		List<WebElement> rowsLastname = driver.findElements(By.xpath("//td[2]"));
+		rowsFirstname.remove(rowsFirstname.size()-1);
+		rowsLastname.remove(rowsLastname.size()-1);
+		for (int i=0; i<rowsFirstname.size(); i++) {
+			String firstname = rowsFirstname.get(i).getText();
+			String lastname = rowsLastname.get(i).getText();
+			//title.substring("Select (".length(), title.length() - ")".length());
+			//contact.firstname = title.substring(title.indexOf("(")+1, title.indexOf(")"));
+			contacts.add(new ContactData().withFirstname(firstname).withLastname(lastname));
+		}
+		return contacts;
 	}
 	
 

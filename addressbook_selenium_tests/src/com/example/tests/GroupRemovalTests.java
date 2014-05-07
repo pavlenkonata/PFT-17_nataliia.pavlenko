@@ -15,7 +15,8 @@ public class GroupRemovalTests extends TestBase{
 	public void deleteSomeGroup() {
 	    
 	    // save old state
-	  SortedListOf<GroupData> oldList = app.getGroupHelper().getGroups();
+	  //SortedListOf<GroupData> oldList = app.getGroupHelper().getUiGroups();
+		SortedListOf<GroupData> oldList = new  SortedListOf<GroupData>(app.getHibernateHelper().listGroups());
 	    
 	  Random rnd = new Random();
 	  int index = rnd.nextInt(oldList.size()-1);
@@ -24,7 +25,7 @@ public class GroupRemovalTests extends TestBase{
 		app.getGroupHelper().deleteGroup(index);
 	    
 	    //save new state
-	   SortedListOf<GroupData> newList = app.getGroupHelper().getGroups();
+	   SortedListOf<GroupData> newList = app.getGroupHelper().getUiGroups();
 	    //compare states
 	   //System.out.println(oldList);
 	    

@@ -17,7 +17,7 @@ public class ContactModificationTests extends TestBase {
 		public void  modifySomeContact(ContactData contact) {
 			
 			//save new state
-			SortedListOf<ContactData> oldList = app.getContactHelper().getContacts();
+			 SortedListOf<ContactData> oldList = new  SortedListOf<ContactData>(app.getHibernateHelper().listContacts());
 			
 		    Random rnd = new Random();
 		    int index = rnd.nextInt(oldList.size()-1);	
@@ -26,7 +26,7 @@ public class ContactModificationTests extends TestBase {
 		    app.getContactHelper().modifyContact(index, contact, MODIFICATION);
 		    
 		    //save old state
-		    SortedListOf<ContactData> newList = app.getContactHelper().getContacts();
+		    SortedListOf<ContactData> newList = app.getContactHelper().getUiContacts();
 		    
 		    //compare states
 		    System.out.println(oldList);

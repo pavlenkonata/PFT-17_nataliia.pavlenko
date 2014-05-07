@@ -28,7 +28,7 @@ public class TestBase {
 		app.start();
 	  }
 
-	@AfterTest
+	//@AfterTest
 	public void tearDown() throws Exception {
 		app.stop();
 	    

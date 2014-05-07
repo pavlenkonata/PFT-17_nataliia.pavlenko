@@ -19,4 +19,7 @@ public class ProcessHelper extends HelperBase {
 	  process.destroy();  
   }
 
+  public void closeApp() throws IOException {
+	    
+  }
 }
